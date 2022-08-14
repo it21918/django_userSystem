@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/it21918/userSystem.git'
+                git branch: 'main', url: 'https://github.com/it21918/django_userSystem.git'
 
                 
             }
