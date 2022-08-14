@@ -216,62 +216,60 @@
     </script>
   </head>
   <body>
-    <form>
-    {% csrf_token %} 
     <div class="container">
       <div class="table-responsive">
         <div class="table-wrapper">
           <div class="table-title">
             <div class="row">
-              <div class="col-xs-7"></div>
+              <div class="col-xs-5">
+                <h2>User <b>Management</b>
+                </h2>
+              </div>
+              <div class="col-xs-7">
+                <a href="/add_user" class="btn btn-primary">
+                  <i class="material-icons">&#xE147;</i>
+                  <span>Add New User</span>
+                </a>
+                <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+              </div>
             </div>
           </div>
           <table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Purpose</th>
-                <th>Status</th>
-                <th>Timestamp</th>
-                <th>Receiver</th>
-                <th>Sender</th>
+                <th>last login</th>
+                <th>is_superuser</th>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>is_Staff</th>
+                <th>is_Active</th>
+                <th>Date joined</th>
+                <th>User type</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>{{ request.id }}</td>
-                <td>{{ request.purpose }}</td>
-                <td>{{ request.status }}</td>
-                <td>{{ request.timestamp }}</td>
-                <td>{{ request.receiver_id }}</td>
-                <td>{{ request.sender_id }}</td>
+            <tbody> {% for user in users %} <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.last_login }}</td>
+                <td>{{ user.is_superuser }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.is_Staff }}</td>
+                <td>{{ user.is_active }}</td>
+                <td>{{ user.date_joined }}</td>
+                <td>{{ user.user_type }}</td>
                 <td>
-              </tr>
-            </tbody>
-        </table>
-        <br></br>
-        <table class="table table-striped table-hover">
-            <thead>
-            {% for lesson in lessons %}
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Grade</th>
-                <th>Semester</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ lesson.id }}</td>
-                <td>{{ lesson.name }}</td>
-                <td>{{ lesson.grade }}</td>
-                <td>{{ lesson.semester }}</td>
+                  <a href="edit_user/{{ user.id }}" class="btn btn-success">Edit</a>
+                </td>
                 <td>
-              </tr>
-              {% endfor %}
-            </tbody>
-        </table>
-        <input type="submit" formaction="/accept_request/{{request.id}}" value="Accept">
-        <input type="submit" formaction="/reject_request/{{request.id}}" value="Reject">
-        </div></div></div>
-    </form>
+                  <a href="delete_user/{{ user.id }}" class="btn btn-success">Delete</a>
+                </td>
+              </tr> {% endfor %} </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
