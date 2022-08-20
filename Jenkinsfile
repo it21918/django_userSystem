@@ -20,16 +20,28 @@ pipeline {
                     pip install -r requirements.txt
                     cd userSystem
                     cp userSystem/.env.example userSystem/.env
+                    chmod +x manage.py
                     ./manage.py test'''
             }
         }
         
+        stage('Prepare DB') {
+            steps {
+                sshagent (credentials: ['ssh-deployment-1']) {
+                    sh '''
+                        pwd
+                        echo $WORKSPACE
+                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l database ~/workspace/ansible-django/playbooks/postgres.yml
+                        '''
+            }
+            }
+        }
     
         stage('deploym to vm 1') {
             steps{
-                sshagent (credentials: ['ssh-deploy']) {
+                sshagent (credentials: ['ssh-deployment-1']) {
                     sh '''
-                        ansible-playbook -i ~/workspace/ansible-project/ansible-test-jenkins/hosts.yml -l deploymentjenkins ~/workspace/ansible-project/ansible-test-jenkins/playbooks/django-project-install.yml
+                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l deploymentservers ~/workspace/ansible-django/playbooks/django-project-install-userSystem.yml
                     '''
                 }
 
