@@ -16,7 +16,8 @@ pipeline {
             steps {
                 sh '''
                     python3 -m venv myvenv
-                    source myvenv/bin/activate
+                    #source myvenv/bin/activate
+                    source myvenv/Scripts/activate
                     pip install -r requirements.txt
                     cd userSystem
                     cp userSystem/.env.example userSystem/.env
