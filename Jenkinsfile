@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/it21918/userSystem.git'
+                git branch: 'kubernates_django_userSystem', url: 'https://github.com/it21918/userSystem.git'
 
                 
             }
@@ -29,7 +29,7 @@ pipeline {
             steps{
                 sshagent (credentials: ['ssh-deploy']) {
                     sh '''
-                        ansible-playbook -i ~/workspace/ansible-project/ansible-test-jenkins/hosts.yml -l deploymentjenkins ~/workspace/ansible-project/ansible-test-jenkins/playbooks/django-project-install.yml
+                        ansible-playbook -i ~/workspace/ansible-project/ansible-test-jenkins/hosts.yml -l deploymentjenkins ~/workspace/ansible-project/ansible-test-jenkins/playbooks/django2-install-microk8s.yml
                     '''
                 }
 
