@@ -9,11 +9,11 @@ COPY ./requirements.txt ./
 
 RUN pip install -r requirements.txt
 # Copy main.py file
-COPY ./adminSystem ./
+COPY ./userSystem ./
 
 RUN  python manage.py collectstatic --noinput
 
-EXPOSE 8000/tcp
+EXPOSE 9000/tcp
 
 # Tell what to do when it starts as a container
-CMD ["gunicorn", "adminSystem.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "userSystem.wsgi:application", "--bind", "0.0.0.0:9000"]
