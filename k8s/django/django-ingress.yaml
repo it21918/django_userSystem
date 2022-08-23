@@ -1,16 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: fastapi-ingress
+  name: fastapi-ingress22
 spec:
   rules:
-  - host: "django-21918.cloudns.ph"
+  - host: "django2-system.ddns.net"
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: django-clip
+            name: django2-clip
             port:
-              number: 8000
+              number: 9000
