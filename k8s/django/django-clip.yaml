@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: django-clip
+  name: django2-clip
 spec:
   type: ClusterIP
   selector:
-    component: django
+    component: django2
   ports:
-    - port: 8000
-      targetPort: 8000
+    - port: 9000
+      targetPort: 9000
