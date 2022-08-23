@@ -1,52 +1,39 @@
 version: "3"
 
 services:
-  db:
-    image: postgres:13
+   smtp-server:
+    image: mailhog/mailhog
+    expose:
+      - 1025
+      - 8025
     ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=it21918@hua.gr
-      - POSTGRES_DB=postgresdb
-    volumes:
-      - dj_postgres_data:/var/lib/postgresql/data/
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - pg_isready -U postgres
-      interval: 30s
-      timeout: 30s
-      retries: 3
+      - '1025:1025'
+      - '8025:8025'
 
-
-  django:
+   django2:
     build:
       context: .
       dockerfile: Dockerfile
     env_file:
-     - ./student_management/student_management/.env
+     - ./userSystem/userSystem/.env
     ports:
-      - "8000:8000"
+      - "9000:9000"
     volumes:
-      - static_volume:/app/static
-    depends_on:
-      db:
-        condition: service_healthy
-  nginx:
+      - static_volume:/app2/static
+    
+   nginx:
     image: nginx:latest
     volumes:
-      - ./nginx.http.config:/etc/nginx/nginx.conf
+      - ./nginx2.http.config:/etc/nginx/nginx.conf
       #- ./assets/nginx/certs:/etc/nginx/certs
-      - static_volume:/app/static
+      - static_volume:/app2/static
     ports:
       # - "443:443"
-      - "80:80"
+      - "100:100"
     depends_on:
-      - django
+      - django2
     restart:
       on-failure:5
 
 volumes:
-  dj_postgres_data:
   static_volume:
