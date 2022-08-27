@@ -33,8 +33,7 @@ pipeline {
                     sh '''
                         pwd
                         echo $WORKSPACE
-                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l database ~/workspace/ansible-django/playbooks/django-install-microk8s-adminSystem.yml
-                        '''
+                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l database ~/workspace/ansible-django/playbooks/django-install-microk8s-userSystem.yml
             }
             }
         }
