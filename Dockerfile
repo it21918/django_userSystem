@@ -13,7 +13,7 @@ COPY ./userSystem ./
 
 RUN  python manage.py collectstatic --noinput
 
-EXPOSE 9000/tcp
+EXPOSE 9001/tcp
 
 # Tell what to do when it starts as a container
-CMD ["gunicorn", "userSystem.wsgi:application", "--bind", "0.0.0.0:9000"]
+CMD ["gunicorn", "userSystem.wsgi:application", "--bind", "0.0.0.0:9001"]
