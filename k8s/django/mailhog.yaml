@@ -9,10 +9,10 @@ spec:
   ports:
     - name: mailhog
       port: 8025
-      targetPort: 8025
+      targetPort: 8027
     - name: smtp
       port: 1025
-      targetPort: 1025
+      targetPort: 1027
   selector:
     app: mailhog
 
@@ -38,7 +38,7 @@ spec:
         - image: mailhog/mailhog
           name: mailhog
           ports:
-            - containerPort: 8025
-            - containerPort: 1025
+            - containerPort: 8027
+            - containerPort: 1027
           resources: {}
       restartPolicy: Always
