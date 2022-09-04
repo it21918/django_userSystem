@@ -8,10 +8,10 @@ spec:
   type: NodePort
   ports:
     - name: mailhog
-      port: 8025
+      port: 8027
       targetPort: 8027
     - name: smtp
-      port: 1025
+      port: 1027
       targetPort: 1027
   selector:
     app: mailhog
