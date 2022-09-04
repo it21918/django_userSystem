@@ -2,7 +2,7 @@ version: "3"
 
 services:
    smtp-server:
-    image: mailhog/mailhog
+    image: mailhog/mailhog:latest
     expose:
       - 1025
       - 8025
