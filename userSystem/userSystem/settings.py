@@ -83,6 +83,8 @@ WSGI_APPLICATION = 'userSystem.wsgi.application'
 
 DATABASES = {
    'default': env.db()
+    
+   'extra': env.db('SQLITE_URL', default='sqlite:///.db.sqlite3')
 }
 
 # Password validation
