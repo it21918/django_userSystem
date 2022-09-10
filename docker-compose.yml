@@ -1,14 +1,6 @@
 version: "3"
 
 services:
-   smtp-server:
-    image: mailhog/mailhog:latest
-    expose:
-      - 1025
-      - 8025
-    ports:
-      - '1026:1025'
-      - '8026:8025'
 
    django2:
     build:
