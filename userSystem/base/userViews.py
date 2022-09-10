@@ -125,10 +125,10 @@ def view_recommendation_letter(request) :
     letters = []
     
     
-    for request in list(requests): 
-        if (request.status == 'pending'):
-            requests.remove(request)
+#     for request in list(requests): 
+#         if (request.status == 'pending'):
+#             requests.remove(request)
 
-    for x in requests: letters.append(Recommendation_letter.objects.get(request_id != x.id))
+    for x in requests: letters.append(Recommendation_letter.objects.filter(request_id = x.id))
 
     return render(request,"student_templates/view_recommendation_letter.html",{"letters":letters} )
