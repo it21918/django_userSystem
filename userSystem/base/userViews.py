@@ -125,11 +125,9 @@ def view_recommendation_letter(request) :
     letters = []
     
     
-    for request in requests: {
-     if (request.status == 'pending') {
-         requests.remove(request);
-     }
-    }
+    for request in requests: 
+        if (request.status == 'pending'):
+            requests.remove(request)
 
     for x in requests: letters.append(Recommendation_letter.objects.get(request_id = x.id))
 
