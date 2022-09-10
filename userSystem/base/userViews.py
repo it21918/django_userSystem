@@ -124,7 +124,7 @@ def view_recommendation_letter(request) :
     requests = Request.objects.filter(sender_id = request.user.id)
     letters = []
     
-    for(i=0 ; i<requests.length; i++) {
+    for(int i=0 ; i<requests.length; i++) {
      if (requests[i].status = 'pending') {
          requests.pop(i);
      }
