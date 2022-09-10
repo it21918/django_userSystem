@@ -123,6 +123,12 @@ def add_recommendation_letter_save(request):
 def view_recommendation_letter(request) :
     requests = Request.objects.filter(sender_id = request.user.id)
     letters = []
+    
+    for(i=0 ; i<requests.length; i++) {
+     if (requests[i].status = 'pending') {
+         requests.pop(i);
+     }
+    }
 
     for x in requests: letters.append(Recommendation_letter.objects.get(request_id = x.id))
 
