@@ -124,6 +124,6 @@ def view_recommendation_letter(request) :
     requests = Request.objects.filter(sender_id = request.user.id)
     letters = []
 
-    for x in requests: letters.append(Recommendation_letter.objects.filter(id = x.id))
+    for x in requests: letters.append(Recommendation_letter.objects.get(request_id = x.id))
 
     return render(request,"student_templates/view_recommendation_letter.html",{"letters":letters} )
