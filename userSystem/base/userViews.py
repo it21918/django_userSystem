@@ -121,7 +121,7 @@ def add_recommendation_letter_save(request):
             return HttpResponseRedirect(reverse("add_recommendation_letter"))  
 
 def view_recommendation_letter(request) :
-    requests = Request.objects.filter(sender_id = request.user.id && status == 'Accepted')
+    requests = Request.objects.filter(sender_id = request.user.id)
     letters = []
     
     
