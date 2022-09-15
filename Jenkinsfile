@@ -25,29 +25,31 @@ pipeline {
             }
         }
         
-        stage('Prepare DB') {
+        
+        stage('Prepare Docker') {
             steps {
                 sshagent (credentials: ['ssh-deployment-1']) {
                     sh '''
                         pwd
                         echo $WORKSPACE
-                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l database ~/workspace/ansible-django/playbooks/postgres.yml
+                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l database ~/workspace/ansible-django/playbooks/docker-install.yml
                         '''
             }
             }
         }
         
-    
-        stage('deploym to vm 1') {
-            steps{
+        stage('deploy docker userSystem image to vm 1') {
+            steps {
                 sshagent (credentials: ['ssh-deployment-1']) {
                     sh '''
-                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l deploymentservers ~/workspace/ansible-django/playbooks/django-project-install-userSystem.yml
-                    '''
-                }
-
+                        pwd
+                        echo $WORKSPACE
+                        ansible-playbook -i ~/workspace/ansible-django/hosts.yml -l database ~/workspace/ansible-django/playbooks/django-userSystem-docker.yml
+                        '''
             }
-
+            }
         }
+    
+
     }
 }
